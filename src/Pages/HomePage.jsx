@@ -1,8 +1,11 @@
 
 import './header.css';
+
+
 import './HomePage.css';
 export function HomePage() {
     return (  <>
+            <title> HomePage</title>
                <div className="header">
             <div className="left-section">
                 <a href="index.html" className="header-link">
