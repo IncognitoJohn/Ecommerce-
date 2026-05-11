@@ -1,14 +1,30 @@
 import {Header} from '../components/Header.jsx';
+import {useEffect,useState} from "react";
 import '../components/header.css';
-import {products} from "../assets/products.js";
+
 import axios from 'axios';
 import './HomePage.css';
+
+
 export function HomePage() {
-     axios.get('http://localhost:3000/api/products').then((response)=>{
-       console.log(response.data);
-    })
+    const[products,setProducts]=useState([]);
+    const [error, setError] = useState(null)
 
 
+    useEffect(()=>{
+        axios.get('http://localhost:3000/api/products')
+            .then((response)=>{
+         setProducts(response.data);
+        })
+            .catch((err)=>{
+                console.error("Backend Error:",err);
+                setError(err.response?.data?.message || "Failed to fetch products. Please try again later.");
+
+            })
+
+    },[ ]);
+
+    if (error) return <div className="error-message">{error}</div>;
     return (<>
     <title> HomePage</title>
     <Header/>
