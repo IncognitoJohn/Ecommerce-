@@ -1,10 +1,11 @@
-import './CheckoutPage.css';
+ import './CheckoutPage.css';
 import {formatMoney} from "../utils/money.jsx";
 import './checkout-header.css';
 import {Link} from "react-router";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import dayjs from "dayjs";
+ import cartItems from "../../ecommerce-backend-ai/routes/cartItems.js";
 export function CheckoutPage({cart = [],}) {
     const[deliveryOptions,setDeliveryOptions] =useState([]);
 
@@ -50,10 +51,18 @@ export function CheckoutPage({cart = [],}) {
                 <div className="checkout-grid">
                     <div className="order-summary">
                         {cart.map((carts) => {
+                            const selectedDeliveryOption = deliveryOptions
+                                .find((deliveryOption)=>{
+                                    return deliveryOption.id === carts.deliveryOptionId;
+
+
+                            });
+
+
                             return (
                                 <div key={carts.productId} className="cart-item-container">
                                     <div className="delivery-date">
-                                        Delivery date: Tuesday, June 21
+                                        Delivery date: {dayjs(selectedDeliveryOption.estimatedDeliveryTimeMs).format('dddd,MMMM, YYYY' )}
                                     </div>
 
                                     <div className="cart-item-details-grid">
