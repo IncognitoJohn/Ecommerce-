@@ -8,7 +8,8 @@ import './HomePage.css';
 
 export function HomePage() {
     const[products,setProducts]=useState([]);
-    const [error, setError] = useState(null)
+    const [error, setError] = useState(null);
+    const[cart,setCart]=useState([]);
 
 
     useEffect(()=>{
@@ -22,12 +23,22 @@ export function HomePage() {
 
             })
 
+        axios.get('http://localhost:3000/api/cart-items')
+            .then((response)=>{
+                setCart(response.data);
+
+            })
+            .catch((err)=>{
+                console.error("Backend Error:",err);
+                setError(err.response?.data?.message || "Failed to cart products. Please try again later.");
+
+            })
     },[ ]);
 
     if (error) return <div className="error-message">{error}</div>;
     return (<>
     <title> HomePage</title>
-    <Header/>
+    <Header cart={cart}/>
     <div className="home-page">
         <div className="products-grid">
             {products.map((product) => {
