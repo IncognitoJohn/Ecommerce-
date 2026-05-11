@@ -6,10 +6,10 @@ import axios from 'axios';
 import './HomePage.css';
 
 
-export function HomePage() {
+export function HomePage({cart}) {
     const[products,setProducts]=useState([]);
     const [error, setError] = useState(null);
-    const[cart,setCart]=useState([]);
+
 
 
     useEffect(()=>{
@@ -20,17 +20,6 @@ export function HomePage() {
             .catch((err)=>{
                 console.error("Backend Error:",err);
                 setError(err.response?.data?.message || "Failed to fetch products. Please try again later.");
-
-            })
-
-        axios.get('/api/cart-items')
-            .then((response)=>{
-                setCart(response.data);
-
-            })
-            .catch((err)=>{
-                console.error("Backend Error:",err);
-                setError(err.response?.data?.message || "Failed to cart products. Please try again later.");
 
             })
     },[ ]);
