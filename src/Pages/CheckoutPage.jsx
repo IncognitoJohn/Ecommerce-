@@ -62,6 +62,7 @@ export function CheckoutPage({cart = [],}) {
                             return (
                                 <div key={carts.productId} className="cart-item-container">
                                     <div className="delivery-date">
+                                        <!-- I stopped here for some delivery stuff at time 7 h 18 mins 31 secs-->
                                         Delivery date: {dayjs(selectedDeliveryOption.estimatedDeliveryTimeMs).format('dddd,MMMM, YYYY' )}
                                     </div>
 
