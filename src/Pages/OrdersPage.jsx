@@ -4,28 +4,28 @@ import {useState, useEffect, Fragment} from "react";
 import axios from "axios";
 import dayjs from "dayjs";
 import {formatMoney} from "../utils/money.jsx";
-
 export function OrdersPage({cart}) {
-    const [orders, setOrders] = useState([]);
+    const [orders,setOrders]=useState([]);
 
-    useEffect(() => {
-        axios.get('/api/orders?expand=products').then((response) => {
+    useEffect(()=>{
+        axios.get('/api/orders?expand=products').
+        then((response)=>{
             setOrders(response.data)
 
         })
-    },[]);
+    })
     return (
         <>
 
             <title>Orders</title>
             <Header cart={cart}/>
-            <div className="orders-page">
+<div className="orders-page">
                 <div className="page-title">Your Orders</div>
 
                 <div className="orders-grid">
                     {
-                        orders.map((order) => {
-                            return (
+                        orders.map((order)=>{
+                            return(
                                 <div key={order.id} className="order-container">
                                     <div className="order-header">
                                         <div className="order-header-left-section">
@@ -33,7 +33,7 @@ export function OrdersPage({cart}) {
                                                 <div className="order-header-label">Order Placed:</div>
                                                 <div>
                                                     {dayjs(order.orderTimeMs).format('dddd,MMMM, YYYY')}
-                                                </div>
+                                                    </div>
                                             </div>
                                             <div className="order-total">
                                                 <div className="order-header-label">Total:</div>
@@ -48,8 +48,8 @@ export function OrdersPage({cart}) {
                                     </div>
 
                                     <div className="order-details-grid">
-                                        {order.products.map((orderProduct) => {
-                                            return (
+                                        {order.products.map((orderProduct)=>{
+                                            return(
                                                 <Fragment key={orderProduct.product.id}>
                                                     <div className="product-image-container">
                                                         <img src={orderProduct.product.image}/>
@@ -67,8 +67,7 @@ export function OrdersPage({cart}) {
                                                             Quantity: {orderProduct.quantity}
                                                         </div>
                                                         <button className="buy-again-button button-primary">
-                                                            <img className="buy-again-icon"
-                                                                 src="images/icons/buy-again.png"/>
+                                                            <img className="buy-again-icon" src="images/icons/buy-again.png"/>
                                                             <span className="buy-again-message">Add to Cart</span>
                                                         </button>
                                                     </div>
@@ -83,7 +82,7 @@ export function OrdersPage({cart}) {
 
                                                 </Fragment>
 
-                                            );
+                                        );
 
 
                                         })
