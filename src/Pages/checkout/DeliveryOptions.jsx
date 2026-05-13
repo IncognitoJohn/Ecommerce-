@@ -30,6 +30,7 @@ export const DeliveryOptions = ({deliveryOptions,carts,loadCart}) => {
                         <input type="radio"
                                checked={deliveryoptions.id ===
                                    carts.deliveryOptionId}
+                               onChange={()=>{}}
                                className="delivery-option-input"
                                name={`delivery-option-${carts.productId}`}/>
                         <div>
